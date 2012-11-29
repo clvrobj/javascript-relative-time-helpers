@@ -38,6 +38,34 @@
  * --> 'Right now'
  *
  */
+var TRANSLATIONS = {
+    'Right now':'现在',
+    'Just now':'刚刚',
+    'from now':'之后',
+    'ago':'前',
+    'Today':'今天',
+    'Yesterday':'昨天',
+    'Tomorrow':'明天',
+    ' at ':'',
+    's':'',
+    ' ':'',
+    'millisecond':'毫秒',
+    'second':'秒',
+    'minute':'分钟',
+    'hour':'小时',
+    'day':'天',
+    'month':'个月',
+    'year':'年',
+    'Sunday':'星期天',
+    'Monday':'星期六',
+    'Tuesday':'星期二',
+    'Wednesday':'星期三',
+    'Thursday':'星期四',
+    'Friday':'星期五',
+    'Saturday':'星期六'
+},
+_t = function (key) {return TRANSLATIONS[key];};
+
  Date.prototype.toRelativeTime = (function() {
 
   var _ = function(options) {
@@ -50,7 +78,7 @@
 
     // special cases controlled by options
     if (delta <= opts.nowThreshold) {
-      return future ? 'Right now' : 'Just now';
+      return future ? _t('Right now') : _t('Just now');
     }
     if (opts.smartDays && delta <= 6 * MS_IN_DAY) {
       return toSmartDays(this, now);
@@ -60,14 +88,14 @@
     for (var key in CONVERSIONS) {
       if (delta < CONVERSIONS[key])
         break;
-      units = key; // keeps track of the selected key over the iteration
-      delta = delta / CONVERSIONS[key];
+      units = _t(key); // keeps track of the selected key over the iteration
+     delta = delta / CONVERSIONS[key];
     }
 
     // pluralize a unit when the difference is greater than 1.
     delta = Math.floor(delta);
-    if (delta !== 1) { units += "s"; }
-    return [delta, units, future ? "from now" : "ago"].join(" ");
+    if (delta !== 1) { units += _t("s"); }
+    return [delta, units, future ? _t("from now") : _t("ago")].join(_t(" "));
   };
 
   var processOptions = function(arg) {
@@ -86,11 +114,11 @@
     var day;
     var weekday = date.getDay(),
         dayDiff = weekday - now.getDay();
-    if (dayDiff == 0)       day = 'Today';
-    else if (dayDiff == -1) day = 'Yesterday';
-    else if (dayDiff == 1 && date > now)  day = 'Tomorrow';
+    if (dayDiff == 0)       day = _t('Today');
+    else if (dayDiff == -1) day = _t('Yesterday');
+    else if (dayDiff == 1 && date > now)  day = _t('Tomorrow');
     else                    day = WEEKDAYS[weekday];
-    return day + " at " + date.toLocaleTimeString();
+    return day + _t(" at ") + date.toLocaleTimeString();
   };
 
   var CONVERSIONS = {
@@ -104,7 +132,7 @@
   };
   var MS_IN_DAY = (CONVERSIONS.millisecond * CONVERSIONS.second * CONVERSIONS.minute * CONVERSIONS.hour * CONVERSIONS.day);
 
-  var WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var WEEKDAYS = [_t('Sunday'), _t('Monday'), _t('Tuesday'), _t('Wednesday'), _t('Thursday'), _t('Friday'), _t('Saturday')];
 
   return _;
 
