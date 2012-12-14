@@ -38,35 +38,35 @@
  * --> 'Right now'
  *
  */
-var TRANSLATIONS = {
-    'Right now':'现在',
-    'Just now':'刚刚',
-    'from now':'之后',
-    'ago':'前',
-    'Today':'今天',
-    'Yesterday':'昨天',
-    'Tomorrow':'明天',
-    ' at ':'',
-    's':'',
-    ' ':'',
-    'millisecond':'毫秒',
-    'second':'秒',
-    'minute':'分钟',
-    'hour':'小时',
-    'day':'天',
-    'month':'个月',
-    'year':'年',
-    'Sunday':'星期天',
-    'Monday':'星期六',
-    'Tuesday':'星期二',
-    'Wednesday':'星期三',
-    'Thursday':'星期四',
-    'Friday':'星期五',
-    'Saturday':'星期六'
-},
-_t = function (key) {return TRANSLATIONS[key];};
 
  Date.prototype.toRelativeTime = (function() {
+  var TRANSLATIONS = {
+      'Right now':'现在',
+      'Just now':'刚刚',
+      'from now':'之后',
+      'ago':'前',
+      'Today':'今天',
+      'Yesterday':'昨天',
+      'Tomorrow':'明天',
+      ' at ':'',
+      's':'',
+      ' ':'',
+      'millisecond':'毫秒',
+      'second':'秒',
+      'minute':'分钟',
+      'hour':'小时',
+      'day':'天',
+      'month':'个月',
+      'year':'年',
+      'Sunday':'星期天',
+      'Monday':'星期六',
+      'Tuesday':'星期二',
+      'Wednesday':'星期三',
+      'Thursday':'星期四',
+      'Friday':'星期五',
+      'Saturday':'星期六'
+  },
+  _t = function (key) {return TRANSLATIONS[key];};
 
   var _ = function(options) {
     var opts = processOptions(options);
